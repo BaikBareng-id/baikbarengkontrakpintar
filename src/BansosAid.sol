@@ -19,6 +19,13 @@ contract BansosAid {
         admin = msg.sender;
     }
 
+    /// @notice Allows the current admin to transfer admin rights to a new address
+    /// @param newAdmin The address of the new admin
+    function transferAdmin(address newAdmin) external onlyAdmin {
+        require(newAdmin != address(0), "Invalid address");
+        admin = newAdmin;
+    }
+
     /// @notice Issue aid to a hashed identity (off-chain hash of NIK + program)
     /// @param userHash keccak256(abi.encodePacked(nik, programName))
     /// @param programName Human-readable aid program name
